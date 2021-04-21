@@ -1,10 +1,10 @@
-import React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
+//styling for this componant
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+//Structure for navbar componant
 function Navbar() {
   const classes = useStyles();
 
@@ -26,8 +27,12 @@ function Navbar() {
           <Typography variant="h6" className={classes.title}>
             User registers
           </Typography>
-          <Button color="inherit">Add User</Button>
-          <Button color="inherit">List User</Button>
+          <Button color="inherit" id="addUser">
+            Add User
+          </Button>
+          <Button color="inherit" id="listUsers">
+            List User
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
