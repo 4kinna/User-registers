@@ -9,24 +9,28 @@ interface UserUIProps {
 }
 
 //styling for this componant
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: "flex",
-      padding: "10px",
-      margin: "10px",
-    },
-    head: {
-      display: "flex",
-      //flexDirection: "row",
-    },
-    img: {
-      maxWidth: "100px",
-      maxHeight: "auto",
-      padding: "10px",
-    },
-  })
-);
+const useStyles = makeStyles({
+  root: {
+    display: "flex",
+    padding: "10px",
+    margin: "auto",
+  },
+  head: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  center: {
+    padding: "10px",
+    margin: "auto",
+    fontSize: "calc(0.4rem + 1vw)",
+  },
+  img: {
+    maxWidth: "100px",
+    //maxHeight: "auto",
+    padding: "10px",
+    borderRadius: "10%",
+  },
+});
 
 // structure for how we will present are list of users and with what values
 function UserUI(props: UserUIProps) {
@@ -34,16 +38,15 @@ function UserUI(props: UserUIProps) {
   const { user } = props;
   return (
     <>
-      <Card className={classes.root}>
-        <div className={classes.head}>
-          <img className={classes.img} src={user.profilePicture} />
-          <h3>{user.name}</h3>
-          <div>
-            <p>Company;{user.companyName}</p> <p>Email;{user.email}</p>{" "}
-            <p>
-              Phonenumber;
-              {user.phoneNumber}
-            </p>
+      <Card>
+        <div className={classes.root}>
+          <div className={classes.head}>
+            <h3>{user.name}</h3>
+            <img className={classes.img} src={user.profilePicture} />
+          </div>
+          <div className={classes.center}>
+            <p>Company; {user.companyName}</p> <p>Email; {user.email}</p>{" "}
+            <p>Phone; {user.phone}</p>
           </div>
         </div>
       </Card>

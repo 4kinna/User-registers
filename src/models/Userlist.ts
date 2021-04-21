@@ -13,7 +13,7 @@ export const allUsers: Userlist = {
       name: "Anton Stålhandske",
       companyName: "Green Adviser",
       email: "AntonStalhandske@greenadviser.se",
-      phoneNumber: "0700000000",
+      phone: "0700000000",
     },
     {
       profilePicture:
@@ -21,7 +21,7 @@ export const allUsers: Userlist = {
       name: "Victor Håkansson",
       companyName: "Green Adviser",
       email: "Victorhakansson@greenadviser.com",
-      phoneNumber: "0700000000",
+      phone: "0700000000",
     },
     {
       profilePicture:
@@ -29,7 +29,7 @@ export const allUsers: Userlist = {
       name: "Ted Nilsson",
       companyName: "Green Adviser",
       email: "tednilsson@greenadviser.com",
-      phoneNumber: "0700000000",
+      phone: "0700000000",
     },
   ],
 };

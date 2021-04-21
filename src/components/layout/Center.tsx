@@ -2,7 +2,6 @@ import React from "react";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import List from "../layout/List";
-import { Height } from "@material-ui/icons";
 
 //styling for this componant
 const useStyles = makeStyles((theme: Theme) =>
@@ -16,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
       "& > *": {
         widthMax: "80%",
-        Height: "100%",
+        height: "100%",
       },
     },
   })

@@ -1,41 +1,138 @@
-import Card from "@material-ui/core/Card";
 import { User } from "../../models/User";
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import { useState, useRef } from "react";
 import { allUsers } from "../../models/Userlist";
+
+const useStyles = makeStyles({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: "10px",
+    height: "100%",
+  },
+  formbox: {
+    display: "flex",
+    //padding: "10px",
+    //margin: "1px",
+    "& > *": {
+      margin: "3px",
+      padding: "1px",
+      width: "60ch",
+    },
+  },
+  button: {
+    display: "flex",
+    margin: "10px",
+    alignItems: "center",
+  },
+});
 
 interface UserUIProps {
   user: User;
 }
 
-document.getElementById("addUser")?.addEventListener("click", addToAllUsers);
+function AddUser() {
+  const classes = useStyles();
+  let userInput = useRef() as React.MutableRefObject<HTMLInputElement>;
 
-function AddUser(props: UserUIProps) {
-  const { user } = props;
+  const [info, setInfo] = useState({
+    name: "",
+    companyName: "",
+    email: "",
+    phone: "",
+    img: "",
+  });
 
-  // här ska jag lägga funktionerna som ska updatera listan näs en ny användare läggs till!
+  function handleChange(event: any) {
+    setInfo({ ...info, [event.target.id]: event.target.value });
+    //console.log(info);
+  }
 
-  //   document.getElementById("add")?.addEventListener("click", addToAllUsers);
+  function handleReset() {
+    setInfo({
+      name: "",
+      companyName: "",
+      email: "",
+      phone: "",
+      img: "",
+    });
+  }
 
-  //   function addToAllUsers() {
-  //     allUsers.Users.push();
-  //     //document.getElementById("activUsers").innerHTML = allUsers.Users;
-  //   }
+  function handleAddingUser() {
+    console.log(info);
+
+    const newUser: User = {
+      name: info.name,
+      companyName: info.companyName,
+      email: info.email,
+      phone: info.phone,
+      profilePicture: info.img,
+    };
+
+    allUsers.Users.push(newUser);
+  }
 
   return (
     <>
       <Card>
-        <div>
-          <form id="addUserForm">
-            <label>Name:</label>
-            <input id="name" type="text" value={user.name} />
-            <label>Company:</label>
-            <input id="companyName" type="text" value={user.companyName} />
-            <label>Email:</label>
-            <input id="email" type="email" value={user.email} />
-            <label>Phonenumber:</label>
-            <input id="phone" type="phone" value={user.phoneNumber} />
+        <div className={classes.root}>
+          <div className={classes.formbox}>
+            <form id="addUserForm">
+              <TextField
+                id="name"
+                ref={userInput}
+                label="Namn:"
+                onChange={(event) => handleChange(event)}
+                value={info.name}
+              />
+              <TextField
+                id="companyName"
+                label="Company:"
+                onChange={(event) => handleChange(event)}
+                value={info.companyName}
+              />
+              <TextField
+                id="email"
+                label="Email:"
+                onChange={(event) => handleChange(event)}
+                value={info.email}
+              />
+              <TextField
+                id="phone"
+                label="Phone:"
+                onChange={(event) => handleChange(event)}
+                value={info.phone}
+              />
+              <TextField
+                id="img"
+                label="Image:"
+                onChange={(event) => handleChange(event)}
+                value={info.img}
+              />
 
-            <button id="add">Add User</button>
-          </form>
+              <Button
+                className={classes.button}
+                variant="contained"
+                id="add"
+                onClick={() => handleAddingUser()}
+              >
+                Add User
+              </Button>
+              <Button
+                className={classes.button}
+                variant="contained"
+                id="reset"
+                onClick={() => handleReset()}
+              >
+                Reset
+              </Button>
+            </form>
+          </div>
         </div>
       </Card>
     </>

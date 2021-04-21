@@ -3,6 +3,6 @@ export interface User {
   profilePicture: string;
   name: string;
   companyName: string;
-  phoneNumber: string;
+  phone: string;
   email: string;
 }
