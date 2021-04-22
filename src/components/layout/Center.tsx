@@ -1,7 +1,8 @@
-import React from "react";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import List from "../layout/List";
+import { useState } from "react";
+import { allUsers } from "../../models/Userlist";
 
 //styling for this componant
 const useStyles = makeStyles((theme: Theme) =>
@@ -24,12 +25,23 @@ const useStyles = makeStyles((theme: Theme) =>
 //structure for the main section on my main page
 function Center({}) {
   const classes = useStyles();
+  const [users, setUsers] = useState(allUsers.Users);
+
+  // function editUser(user) {
+  //   console.log("edit user");
+  // }
+
+  function deleteUser(username: string) {
+    //console.log(username);
+    setUsers(users.filter((item) => item.name !== username));
+    //console.log(users);
+  }
 
   return (
     <div className={classes.root}>
       <Paper elevation={3}>
         <div>
-          <List />
+          <List Users={users} deleteUser={deleteUser} />
         </div>
       </Paper>
     </div>

@@ -38,7 +38,6 @@ interface UserUIProps {
 
 function AddUser() {
   const classes = useStyles();
-  let userInput = useRef() as React.MutableRefObject<HTMLInputElement>;
 
   const [info, setInfo] = useState({
     name: "",
@@ -75,6 +74,7 @@ function AddUser() {
     };
 
     allUsers.Users.push(newUser);
+    //setInfo({ ...info });
   }
 
   return (
@@ -85,7 +85,6 @@ function AddUser() {
             <form id="addUserForm">
               <TextField
                 id="name"
-                ref={userInput}
                 label="Namn:"
                 onChange={(event) => handleChange(event)}
                 value={info.name}

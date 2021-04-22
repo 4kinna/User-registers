@@ -1,12 +1,9 @@
 import { User } from "../../models/User"; //{} is used when we can export multiple values from a componant
-import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
 import Card from "@material-ui/core/Card";
-
-//Interface of the type user?
-//is needet to  be able to use the user valus in our function UserUI
-interface UserUIProps {
-  user: User;
-}
+import Typography from "@material-ui/core/Typography";
 
 //styling for this componant
 const useStyles = makeStyles({
@@ -32,10 +29,18 @@ const useStyles = makeStyles({
   },
 });
 
+//Interface of the type user?
+//is needet to  be able to use the user valus in our function UserUI
+interface UserUIProps {
+  user: User;
+
+  deleteUser(username: string): void;
+}
 // structure for how we will present are list of users and with what values
 function UserUI(props: UserUIProps) {
   const classes = useStyles();
-  const { user } = props;
+  const { user, deleteUser } = props;
+
   return (
     <>
       <Card>
@@ -48,6 +53,9 @@ function UserUI(props: UserUIProps) {
             <p>Company; {user.companyName}</p> <p>Email; {user.email}</p>{" "}
             <p>Phone; {user.phone}</p>
           </div>
+          {/* <EditIcon onClick={() => editUser(user.name)} /> */}
+          <Typography>Delete</Typography>
+          <DeleteIcon onClick={() => deleteUser(user.name)} />
         </div>
       </Card>
     </>
