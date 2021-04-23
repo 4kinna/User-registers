@@ -8,16 +8,18 @@ import { allUsers } from "../../models/Userlist";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
+      margin: "10px auto",
+      "& > *": {
+        widthMax: "80%",
+        height: "100%",
+      },
+    },
+    main: {
       display: "flex",
       flexWrap: "wrap",
       alignItems: "center",
       justifyContent: "center",
       marginBottom: "10px",
-
-      "& > *": {
-        widthMax: "80%",
-        height: "100%",
-      },
     },
   })
 );
@@ -27,10 +29,6 @@ function Center({}) {
   const classes = useStyles();
   const [users, setUsers] = useState(allUsers.Users);
 
-  // function editUser(user) {
-  //   console.log("edit user");
-  // }
-
   function deleteUser(username: string) {
     //console.log(username);
     setUsers(users.filter((item) => item.name !== username));
@@ -39,8 +37,8 @@ function Center({}) {
 
   return (
     <div className={classes.root}>
-      <Paper elevation={3}>
-        <div>
+      <Paper elevation={10}>
+        <div className={classes.main}>
           <List Users={users} deleteUser={deleteUser} />
         </div>
       </Paper>

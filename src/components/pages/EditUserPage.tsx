@@ -1,5 +1,5 @@
 import Navbar from "../layout/Navbar";
-import AddUser from "../layout/AddUserForm";
+import EditUser from "../layout/EditUserForm";
 import Footer from "../layout/Footer";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
@@ -23,8 +23,8 @@ const useStyles = makeStyles({
   },
 });
 
-//Main holds my structure for the main page
-function AddUserPage() {
+//holds my structure for the edit page
+function EditUserPage() {
   const classes = useStyles();
 
   return (
@@ -33,7 +33,7 @@ function AddUserPage() {
       <div className={classes.root}>
         <Paper elevation={3}>
           <div className={classes.main}>
-            <AddUser />
+            <EditUser />
           </div>
         </Paper>
       </div>
@@ -42,4 +42,4 @@ function AddUserPage() {
   );
 }
 
-export default AddUserPage;
+export default EditUserPage;

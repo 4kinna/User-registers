@@ -1,11 +1,11 @@
 import { User } from "../../models/User";
-import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { allUsers } from "../../models/Userlist";
-import { Redirect } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
+import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: any) =>
   createStyles({
@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme: any) =>
       "& > *": {
         margin: "3px",
         padding: "1px",
-        //height: "100%",
       },
     },
     button: {
@@ -45,14 +44,13 @@ const useStyles = makeStyles((theme: any) =>
   })
 );
 
-interface UserUIProps {
-  user: User;
+interface myParam {
+  email: string;
 }
 
-function AddUser() {
+function EditUser() {
   const classes = useStyles();
-
-  const [addedUser, setAddedUser] = useState(false);
+  const [editUser, setEditUser] = useState(false);
 
   const [info, setInfo] = useState({
     name: "",
@@ -62,41 +60,56 @@ function AddUser() {
     img: "",
   });
 
+  //create varible to URL parmameter (emailn)
+  const { email } = useParams<myParam>();
+  //after render we want to få find matching email and setInfo to the objects values, so we can present the current values in are edit Form
+  useEffect(() => {
+    const user = allUsers.Users.find((item) => item.email === email);
+    if (user !== undefined) {
+      setInfo({
+        name: user.name,
+        companyName: user.companyName,
+        email: user.email,
+        phone: user.phone,
+        img: user.profilePicture,
+      });
+    }
+  }, []);
+
+  //Function to handle change on the users values
   function handleChange(event: any) {
     setInfo({ ...info, [event.target.id]: event.target.value });
-    //console.log(info);
+    console.log(info);
   }
 
-  function handleReset() {
-    setInfo({
-      name: "",
-      companyName: "",
-      email: "",
-      phone: "",
-      img: "",
-    });
-  }
   //Function to handel if anny one click add user
-  function handleAddingUser() {
-    //console.log(info);
+  function saveUserUpdates(e: any) {
+    //creating varible to store index for the picked user by email.
+    const index = allUsers.Users.findIndex((item) => item.email === email);
 
-    const newUser: User = {
+    //creating new user
+    const updaterUser: User = {
       name: info.name,
       companyName: info.companyName,
       email: info.email,
       phone: info.phone,
       profilePicture: info.img,
     };
-    // push up newUser to are Aray allUsers.Users
-    allUsers.Users.push(newUser);
+    // replacing index with new user
+    allUsers.Users[index] = updaterUser;
+
     // setAddUser to true to trigger our inline if-statement in our return
-    setAddedUser(true);
+    setEditUser(true);
+  }
+  //function to abort editing, by giving setEditUser to true we will call the inline statement bellow and redirect to main page
+  function goback() {
+    setEditUser(true);
   }
 
   return (
     <>
       {/* inline ifstatement if addUser is true ? redirect :(else) show card with list */}
-      {addedUser ? (
+      {editUser ? (
         <Redirect to={"/"} />
       ) : (
         <div className={classes.root}>
@@ -144,17 +157,18 @@ function AddUser() {
                       className={classes.button}
                       variant="contained"
                       id="add"
-                      onClick={() => handleAddingUser()}
+                      onClick={(e) => saveUserUpdates(e)}
                     >
-                      Add User
+                      Updates
                     </Button>
+
                     <Button
                       className={classes.button}
                       variant="contained"
-                      id="reset"
-                      onClick={() => handleReset()}
+                      id="add"
+                      onClick={() => goback()}
                     >
-                      Reset
+                      Go Back
                     </Button>
                   </div>
                 </form>
@@ -167,4 +181,4 @@ function AddUser() {
   );
 }
 
-export default AddUser;
+export default EditUser;
