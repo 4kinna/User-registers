@@ -56,7 +56,7 @@ function AddUser() {
 
   const [info, setInfo] = useState({
     name: "",
-    companyName: "",
+    company: "",
     email: "",
     phone: "",
     img: "",
@@ -70,7 +70,7 @@ function AddUser() {
   function handleReset() {
     setInfo({
       name: "",
-      companyName: "",
+      company: "",
       email: "",
       phone: "",
       img: "",
@@ -82,7 +82,7 @@ function AddUser() {
 
     const newUser: User = {
       name: info.name,
-      companyName: info.companyName,
+      company: info.company,
       email: info.email,
       phone: info.phone,
       profilePicture: info.img,
@@ -113,10 +113,10 @@ function AddUser() {
                   />
                   <TextField
                     className={classes.myInput}
-                    id="companyName"
+                    id="company"
                     label="Company:"
                     onChange={(event) => handleChange(event)}
-                    value={info.companyName}
+                    value={info.company}
                   />
                   <TextField
                     className={classes.myInput}

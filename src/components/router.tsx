@@ -10,7 +10,7 @@ function AppRouter() {
       <Switch>
         <Route component={MainPage} exact path="/" />
         <Route component={AddUserPage} exact path="/adduser" />
-        <Route component={EditUserPage} exact path="/edituser/:email" />
+        <Route component={EditUserPage} exact path="/edituser/:userId" />
       </Switch>
     </Router>
   );
