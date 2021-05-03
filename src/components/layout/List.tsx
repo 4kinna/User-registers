@@ -14,7 +14,14 @@ function List(props: listProps) {
   return (
     <>
       {Users.map((user: User, key: number) => {
-        return <UserUI key={key} user={user} deleteUser={deleteUser} />;
+        return (
+          <UserUI
+            key={key}
+            user={user}
+            deleteUser={deleteUser}
+            name={"Anton"}
+          />
+        );
       })}
     </>
   );

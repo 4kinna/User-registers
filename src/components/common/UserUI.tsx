@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme: any) =>
 interface UserUIProps {
   user: User;
   deleteUser(username: string): void;
+  name: string;
 }
 // structure for how we will present are list of users and with what values
 function UserUI(props: UserUIProps) {
