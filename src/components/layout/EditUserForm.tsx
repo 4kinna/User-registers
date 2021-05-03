@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { allUsers } from "../../models/Userlist";
 import { Redirect, useParams } from "react-router-dom";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
+import { getUser, putUser } from "../API";
 
 const useStyles = makeStyles((theme: any) =>
   createStyles({
@@ -45,7 +46,7 @@ const useStyles = makeStyles((theme: any) =>
 );
 
 interface myParam {
-  email: string;
+  userId: string;
 }
 
 function EditUser() {
@@ -54,26 +55,25 @@ function EditUser() {
 
   const [info, setInfo] = useState({
     name: "",
-    companyName: "",
+    company: "",
     email: "",
     phone: "",
     img: "",
   });
 
   //create varible to URL parmameter (emailn)
-  const { email } = useParams<myParam>();
+  const { userId } = useParams<myParam>();
   //after render we want to få find matching email and setInfo to the objects values, so we can present the current values in are edit Form
   useEffect(() => {
-    const user = allUsers.Users.find((item) => item.email === email);
-    if (user !== undefined) {
+    getUser(userId).then((data) => {
       setInfo({
-        name: user.name,
-        companyName: user.companyName,
-        email: user.email,
-        phone: user.phone,
-        img: user.profilePicture,
+        name: data.name,
+        company: data.company,
+        email: data.email,
+        phone: data.phone,
+        img: data.profilePicture,
       });
-    }
+    });
   }, []);
 
   //Function to handle change on the users values
@@ -82,21 +82,19 @@ function EditUser() {
     console.log(info);
   }
 
-  //Function to handel if anny one click add user
+  //Function to handel if any one click usdate
   function saveUserUpdates(e: any) {
-    //creating varible to store index for the picked user by email.
-    const index = allUsers.Users.findIndex((item) => item.email === email);
-
     //creating new user
     const updaterUser: User = {
+      userId: userId,
       name: info.name,
-      companyName: info.companyName,
+      company: info.company,
       email: info.email,
       phone: info.phone,
       profilePicture: info.img,
     };
-    // replacing index with new user
-    allUsers.Users[index] = updaterUser;
+
+    putUser(userId, updaterUser);
 
     // setAddUser to true to trigger our inline if-statement in our return
     setEditUser(true);
@@ -126,10 +124,10 @@ function EditUser() {
                   />
                   <TextField
                     className={classes.myInput}
-                    id="companyName"
+                    id="company"
                     label="Company:"
                     onChange={(event) => handleChange(event)}
-                    value={info.companyName}
+                    value={info.company}
                   />
                   <TextField
                     className={classes.myInput}

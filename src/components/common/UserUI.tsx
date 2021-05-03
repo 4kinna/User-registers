@@ -68,11 +68,11 @@ function UserUI(props: UserUIProps) {
 
             <div className={classes.center}>
               <h3>{user.name}</h3>
-              <p>Company; {user.companyName}</p> <p>Email; {user.email}</p>{" "}
+              <p>Company; {user.company}</p> <p>Email; {user.email}</p>{" "}
               <p>Phone; {user.phone}</p>
             </div>
             <div className={classes.myButtons}>
-              <IconButton component={Link} to={`/edituser/${user.email}`}>
+              <IconButton component={Link} to={`/edituser/${user.userId}`}>
                 <EditIcon color="primary" />
               </IconButton>
               <IconButton>
