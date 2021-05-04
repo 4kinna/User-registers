@@ -61,7 +61,7 @@ function EditUser() {
     img: "",
   });
 
-  //create varible to URL parmameter (emailn)
+  //create varible to URL parmameter (userid)
   const { userId } = useParams<myParam>();
   //after render we want to få find matching email and setInfo to the objects values, so we can present the current values in are edit Form
   useEffect(() => {
@@ -87,10 +87,10 @@ function EditUser() {
     //creating new user
     const updaterUser: User = {
       userId: userId,
-      name: info.name,
       company: info.company,
       email: info.email,
       phone: info.phone,
+      name: info.name,
       profilePicture: info.img,
     };
 

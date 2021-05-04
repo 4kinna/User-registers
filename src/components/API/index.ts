@@ -54,20 +54,19 @@ export async function putUser(
       Accept: "application/json, text/plain, */*",
       "Content-type": "application/json",
     },
-    body: JSON.stringify({ data }),
+    body: JSON.stringify(data),
   });
-  return response.json();
 }
 
 //function to featch correct connection so we can add new user
-export async function postUser(url = "http://localhost:8080/users", data = {}) {
+export async function postUser(data = {}, url = "http://localhost:8080/users") {
   const response = await fetch(url, {
     method: "POST",
     headers: {
       Accept: "application/json, text/plain, */*",
       "Content-type": "application/json",
     },
-    body: JSON.stringify({ data }),
+    body: JSON.stringify(data),
   });
   return response.json();
 }

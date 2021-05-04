@@ -1,5 +1,5 @@
 //import React from "react";
-import AppRouter from "./components/Router";
+import AppRouter from "./components/router";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 

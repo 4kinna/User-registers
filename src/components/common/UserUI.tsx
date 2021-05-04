@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme: any) =>
     root: {
       display: "flex",
       margin: "10px",
-      //width: "100vf",
     },
     center: {
       padding: "5px",
@@ -25,7 +24,6 @@ const useStyles = makeStyles((theme: any) =>
     },
     img: {
       maxWidth: "100px",
-      //maxHeight: "200px",
       padding: "10px",
       borderRadius: "10%",
     },
@@ -33,10 +31,6 @@ const useStyles = makeStyles((theme: any) =>
       cursor: "pointer",
       margin: "10px",
       padding: "5px",
-      //display: "flex",
-      //flexDirection: "column",
-      //position: "absolute",
-      //right: 3,
     },
     font: {
       fontFamily: theme.typography.fontFamily,
@@ -51,13 +45,12 @@ const useStyles = makeStyles((theme: any) =>
 //Interface is a blueprint for all the valus we like to take with ous in to our function UserUI
 interface UserUIProps {
   user: User;
-  deleteUser(username: string): void;
-  name: string;
+  removeUser(userId: string): void;
 }
 // structure for how we will present are list of users and with what values
 function UserUI(props: UserUIProps) {
   const classes = useStyles();
-  const { user, deleteUser } = props;
+  const { user, removeUser } = props;
 
   return (
     <>
@@ -78,7 +71,7 @@ function UserUI(props: UserUIProps) {
               <IconButton>
                 <DeleteIcon
                   color="secondary"
-                  onClick={() => deleteUser(user.name)}
+                  onClick={() => removeUser(user.userId!)}
                 />
               </IconButton>
             </div>
