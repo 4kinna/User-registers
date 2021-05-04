@@ -4,7 +4,7 @@ import List from "../layout/List";
 import { useState, useEffect } from "react";
 import { allUsers } from "../../models/Userlist";
 import { User } from "../../models/User";
-import { getUsers } from "../API";
+import { getUsers, deleteUser } from "../API";
 
 //styling for this componant
 const useStyles = makeStyles((theme: Theme) =>
@@ -31,13 +31,13 @@ function Center({}) {
   const classes = useStyles();
   const [users, setUsers] = useState([]);
 
-  function deleteUser(username: string) {
-    //console.log(username);
-    // setUsers(users.filter((item) => item.name !== username));
-    //console.log(users);
+  //function to remove specific User
+  function removeUser(userId: string) {
+    deleteUser(userId);
+    setUsers(users.filter((u: User) => u.userId !== userId));
   }
 
-  //när coponent renderas (körs den engång) sen körs getUsers
+  //när component renderas (körs den engång) sen körs getUsers
   useEffect(() => {
     getUsers().then((data) => setUsers(data));
   }, []);
@@ -46,7 +46,7 @@ function Center({}) {
     <div className={classes.root}>
       <Paper elevation={10}>
         <div className={classes.main}>
-          <List Users={users} deleteUser={deleteUser} />
+          <List Users={users} removeUser={removeUser} />
         </div>
       </Paper>
     </div>

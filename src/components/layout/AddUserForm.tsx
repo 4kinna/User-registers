@@ -6,6 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import { useState } from "react";
 import { allUsers } from "../../models/Userlist";
 import { Redirect } from "react-router-dom";
+import { postUser } from "../API";
 
 const useStyles = makeStyles((theme: any) =>
   createStyles({
@@ -76,7 +77,7 @@ function AddUser() {
       img: "",
     });
   }
-  //Function to handel if anny one click add user
+  //Function to handel if any one click add user
   function handleAddingUser() {
     //console.log(info);
 
@@ -87,8 +88,10 @@ function AddUser() {
       phone: info.phone,
       profilePicture: info.img,
     };
+
+    postUser(newUser);
     // push up newUser to are Aray allUsers.Users
-    allUsers.Users.push(newUser);
+    // allUsers.Users.push(newUser);
     // setAddUser to true to trigger our inline if-statement in our return
     setAddedUser(true);
   }
